@@ -6,6 +6,7 @@
     <{{el.widget.tag}} 
         {% for attr, val in el.widget.attrs %}{{attr}}="{{val}}" {% endfor %}
         name="{{el.name}}" id="{{el.id}}">{% if el.widget.text %}{{el.widget.text}}{% endif %}</{{el.widget.tag}}>
+    {% if el.hint %}<small class="hint">{{el.hint}}</small>{% endif %}
     {% if el.error %}<small class="error">{{el.error}}</small>{% endif %}
     {% if el.hidden %}<input type="hidden" name="{{el.hidden.name}}" value="{{el.hidden.value}}"/>{% endif %}
   </div>
