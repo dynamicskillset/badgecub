@@ -142,13 +142,32 @@ describe ("Forms library", function () {
           name: "aFile",
           label: "File",
           type: "file",
-          require: true
+          required: true
         });
         field.validate({
           body: {
             aFileHidden: '/some/path/somewhere'
           }
         }).should.be.true;
+      });
+
+      it('should error on wrong type', function () {
+        var field = Field.build({
+          name: "aFile",
+          label: "file",
+          type: "file",
+          requireType: ".png"
+        });
+        field.validate({
+          files: {
+            aFile: {path: '/some/path/to/file.json'}
+          }
+        }).should.be.false;
+        field.validate({
+          body: {
+            aFileHidden: '/some/path/to/file.json'
+          }
+        }).should.be.false;
       });
     });
 

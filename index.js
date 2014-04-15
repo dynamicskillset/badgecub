@@ -96,7 +96,8 @@ function prepForm (opts) {
         attrs: {
           accept: 'image/png'
         },
-        required: true
+        required: true,
+        requireType: '.png'
       },
       {
         name: 'title',
