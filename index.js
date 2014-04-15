@@ -188,6 +188,7 @@ app.post('/make', [isAction('preview'), prepForm({validate: true})], function (r
     return res.render('preview.html', {
       imgSrc: dataUri,
       badge: badge,
+      sender: data.name,
       message: data.msg,
       serviceUrl: ISSUER_URL,
       passthrough: form.templateData()
