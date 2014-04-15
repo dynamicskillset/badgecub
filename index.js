@@ -39,6 +39,7 @@ var staticDir = path.join(__dirname, '/static');
 var staticRoot = '/static';
 var expiration = DEBUG ? 0 : 86400000 * 365;
 
+nunjucks.configure({autoescape: true});
 var bodyTpl = nunjucks.compile(fs.readFileSync(path.join(__dirname, './templates/mail.html')).toString());
 var uploader = new Uploader(AWS_CREDENTIALS);
 var emailer = new Emailer({
@@ -51,7 +52,7 @@ var emailer = new Emailer({
 
 var app = express();
 
-var env = new nunjucks.Environment(new nunjucks.FileSystemLoader('templates'));
+var env = new nunjucks.Environment(new nunjucks.FileSystemLoader('templates'), {autoescape: true});
 env.express(app);
 
 app.use(function (req, res, next) {
@@ -96,6 +97,7 @@ function prepForm (opts) {
         attrs: {
           accept: 'image/png'
         },
+        hint: "This cub only likes <strong>pngs</strong> for now.",
         required: true,
         requireType: '.png'
       },
